@@ -2,13 +2,51 @@ import java.util.Scanner;
 
 public class Vigenere {
     public static String encryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int cycle =0;
+        String out = "";
+        for(int i=0;i<message.length();i++){
+        if(cycle==key.length()){
+            cycle=0;
+        }
+        int shift = key.charAt(cycle)-65;
+        if((message.charAt(i) <91-shift && message.charAt(i)>64) || (message.charAt(i) <123-shift && message.charAt(i)>96)){
+            out+=(char) (message.charAt(i)+shift);
+            cycle+=1;
+        }else if(message.charAt(i)<91&&message.charAt(i)>64){
+            out+=(char) (65+(message.charAt(i)%(91-shift)));
+            cycle+=1;
+        }else if(message.charAt(i)<123&&message.charAt(i)>96){
+            out+=(char) (97+(message.charAt(i)%(123-shift)));
+            cycle+=1;
+        }else{
+            out+=message.charAt(i);
+        }
+        }
+        return out;
     }
 
     public static String decryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int cycle =0;
+        String out = "";
+        for(int i=0;i<message.length();i++){
+        if(cycle==key.length()){
+            cycle=0;
+        }
+        int shift = key.charAt(cycle)-65;
+        if( message.charAt(i) <91 && message.charAt(i)>(64+shift) || message.charAt(i) <123 && message.charAt(i)>(96+shift) ){
+            out+=(char) (message.charAt(i)-shift);
+            cycle+=1;
+        }else if(message.charAt(i)<91&&message.charAt(i)>64){
+            out+=(char) (91-shift+(message.charAt(i)%65));
+            cycle+=1;
+        }else if(message.charAt(i)<123&&message.charAt(i)>96){
+            out+=(char) (123-shift+(message.charAt(i)%97));
+            cycle+=1;
+        }else{
+            out+=message.charAt(i);
+        }
+        }
+        return out;
     }
 
 

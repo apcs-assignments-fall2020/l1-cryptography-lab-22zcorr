@@ -2,13 +2,37 @@ import java.util.Scanner;
 
 public class Caesar {
     public static String encryptCaesar(String message) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int shift = 3;
+        String out = "";
+        for(int i=0;i<message.length();i++){
+        if((message.charAt(i) <91-shift && message.charAt(i)>64) || (message.charAt(i) <123-shift && message.charAt(i)>96)){
+            out+=(char) (message.charAt(i)+shift);
+        }else if(message.charAt(i)<91&&message.charAt(i)>64){
+            out+=(char) (65+(message.charAt(i)%(91-shift)));
+        }else if(message.charAt(i)<123&&message.charAt(i)>96){
+            out+=(char) (97+(message.charAt(i)%(123-shift)));
+        }else{
+            out+=message.charAt(i);
+        }
+        }
+        return out;
     }
 
     public static String decryptCaesar(String message) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int shift = 3;
+        String out = "";
+        for(int i=0;i<message.length();i++){
+        if( message.charAt(i) <91 && message.charAt(i)>(64+shift) || message.charAt(i) <123 && message.charAt(i)>(96+shift) ){
+            out+=(char) (message.charAt(i)-shift);
+        }else if(message.charAt(i)<91&&message.charAt(i)>64){
+            out+=(char) (91-shift+(message.charAt(i)%65));
+        }else if(message.charAt(i)<123&&message.charAt(i)>96){
+            out+=(char) (123-shift+(message.charAt(i)%97));
+        }else{
+            out+=message.charAt(i);
+        }
+        }
+        return out;
     }
 
     public static String encryptCaesarKey(String message, int key) {
